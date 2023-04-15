@@ -42,6 +42,16 @@ public class HomeController {
         return "redirect:/list";
     }
 
+    @GetMapping("/update")
+    String updateItem(@RequestParam("id") String id,
+                      @RequestParam("task") String task,
+                      @RequestParam("deadline") String deadline,
+                      @RequestParam("done") boolean done){
+        TaskItem taskItem = new TaskItem(id, task, deadline, done);
+        dao.update(taskItem);
+        return "redirect:/list";
+    }
+
     @RequestMapping(value = "/hello")
     String hello(Model model){
         model.addAttribute("time",LocalDateTime.now());
